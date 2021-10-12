@@ -1,9 +1,10 @@
 #!/bin/bash
-DAY=$1
+YEAR=$1
+DAY=$2
 
-URL='https://adventofcode.com/2017/day/'$DAY
-INPUT_FILE=inputs/day$DAY.in
-SOLUTION_FILE=day$DAY.py
+URL='https://adventofcode.com/'$YEAR'/day/'$DAY
+INPUT_FILE=$YEAR/inputs/day$DAY.in
+SOLUTION_FILE=$YEAR/day$DAY.py
 
 max_fails=10
 cur_fails=0

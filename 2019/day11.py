@@ -1,6 +1,6 @@
 import itertools
 
-input_data = open('inputs/day9.in','r').read().strip().split(',')
+input_data = open('inputs/day11.in','r').read().strip().split(',')
 
 def addition(ind):
     global relative_base
@@ -77,7 +77,6 @@ def output_value(ind):
 
     global outputs
     outputs.append(data.get(p1,0))
-    print(outputs)
     return ind+2
 
 def jump_true(ind):
@@ -182,11 +181,11 @@ def rel_base(ind):
     return ind+2
 
 functions = {1: addition, 2: multiplication, 3: input_value, 4: output_value, 5: jump_true, 6: jump_false, 7: less_than, 8: equals, 9: rel_base}
+directions = {0: (0,-1), 1:  (1,0), 2: (0,1), 3: (-1,0)}
 
 data = {n: int(input_data[n]) for n in range(len(input_data))}
 
 paint = {(0,0): 0}
-directions = {0: (0,-1), 1:  (1,0), 2: (0,1), 3: (-1,0)}
 
 position = (0,0)
 direction = 0
@@ -207,6 +206,45 @@ while data.get(ip,0)%100 != 99:
         else:
             paint[position] = command
         turn = not turn
-    print(str(data.get(ip,0)).zfill(5)[-5:-4])
 
-print('Part 1:', paint)
+print('Part 1:', len(paint))
+
+data = {n: int(input_data[n]) for n in range(len(input_data))}
+
+paint = {(0,0): 1}
+
+position = (0,0)
+direction = 0
+turn = False
+
+relative_base = 0
+outputs = []
+inputs = []
+ip = 0
+while data.get(ip,0)%100 != 99:
+    inputs = [paint.get(position,0)]
+    ip = functions[int(str(data.get(ip,0))[-2:])](ip)
+    if outputs:
+        command = outputs.pop(0)
+        if turn:
+            direction = (direction + (command==1)-(command==0))%4
+            position = (position[0]+directions[direction][0], position[1]+directions[direction][1])
+        else:
+            paint[position] = command
+        turn = not turn
+
+minx = min(paint.keys(), key = lambda t: t[0])[0]
+maxx = max(paint.keys(), key = lambda t: t[0])[0]
+miny = min(paint.keys(), key = lambda t: t[1])[1]
+maxy = max(paint.keys(), key = lambda t: t[1])[1]
+
+print('Part 2:')
+
+for y in range(miny,maxy+1):
+    for x in range(minx,maxx+1):
+        color = paint.get((x,y),0)
+        if color == 1:
+            print('#',end='')
+        else:
+            print(' ',end='')
+    print('')

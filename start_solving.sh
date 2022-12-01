@@ -24,5 +24,8 @@ done
 
 echo "It's ready, start solving!"
 cp -i day0.py $SOLUTION_FILE
+# Updates the day in the template
+sed -i -E "s/day0/day$DAY/" $SOLUTION_FILE
 cmd.exe /C start $URL
-# code -r $INPUT_FILE $SOLUTION_FILE
+code -r $INPUT_FILE $SOLUTION_FILE
+# cd $YEAR

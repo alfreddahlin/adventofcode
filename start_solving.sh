@@ -2,6 +2,8 @@
 YEAR=$1
 DAY=$2
 
+mkdir -p $YEAR'/inputs'
+
 URL='https://adventofcode.com/'$YEAR'/day/'$DAY
 INPUT_FILE=$YEAR/inputs/day$DAY.in
 SOLUTION_FILE=$YEAR/day$DAY.py
@@ -22,5 +24,5 @@ done
 
 echo "It's ready, start solving!"
 cp -i day0.py $SOLUTION_FILE
-# google-chrome $URL
+cmd.exe /C start $URL
 # code -r $INPUT_FILE $SOLUTION_FILE

@@ -4,6 +4,7 @@
 *.dll
 *.so
 *.dylib
+.python-version
 
 # Test binary, build with `go test -c`
 *.test

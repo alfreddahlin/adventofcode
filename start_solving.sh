@@ -22,5 +22,5 @@ done
 
 echo "It's ready, start solving!"
 cp -i day0.py $SOLUTION_FILE
-google-chrome $URL
-emacs $INPUT_FILE $SOLUTION_FILE &
+# google-chrome $URL
+# code -r $INPUT_FILE $SOLUTION_FILE

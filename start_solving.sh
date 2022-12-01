@@ -28,4 +28,4 @@ cp -i day0.py $SOLUTION_FILE
 sed -i -E "s/day0/day$DAY/" $SOLUTION_FILE
 cmd.exe /C start $URL
 code -r $INPUT_FILE $SOLUTION_FILE
-# cd $YEAR
+cd $YEAR

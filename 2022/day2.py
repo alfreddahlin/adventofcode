@@ -1,13 +1,9 @@
-import re
-
 input_data = open("inputs/day2.in", "r").read().strip().split("\n")
 
 point_key = {"A": 1, "B": 2, "C": 3}
 win_key = {"A": ("C", "A", "B"), "B": ("A", "B", "C"), "C": ("B", "C", "A")}
 result_key = {"X": 0, "Y": 1, "Z": 2}
 me = {"X": "A", "Y": "B", "Z": "C"}
-
-
 
 data = [rps.split(" ") for rps in input_data]
 

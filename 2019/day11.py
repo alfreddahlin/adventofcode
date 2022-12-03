@@ -1,193 +1,213 @@
 import itertools
 
-input_data = open('inputs/day11.in','r').read().strip().split(',')
+input_data = open("inputs/day11.in", "r").read().strip().split(",")
+
 
 def addition(ind):
     global relative_base
-    op = str(data.get(ind,0)).zfill(5)
-    if op[-3:-2] == '1':
-        p1 = ind+1
-    elif op[-3:-2] == '2':
-        p1 = relative_base + data.get(ind+1,0)
+    op = str(data.get(ind, 0)).zfill(5)
+    if op[-3:-2] == "1":
+        p1 = ind + 1
+    elif op[-3:-2] == "2":
+        p1 = relative_base + data.get(ind + 1, 0)
     else:
-        p1 = data.get(ind+1,0)
-    if op[-4:-3] == '1':
-        p2 = ind+2
-    elif op[-4:-3] == '2':
-        p2 = relative_base + data.get(ind+2,0)
+        p1 = data.get(ind + 1, 0)
+    if op[-4:-3] == "1":
+        p2 = ind + 2
+    elif op[-4:-3] == "2":
+        p2 = relative_base + data.get(ind + 2, 0)
     else:
-        p2 = data.get(ind+2,0)
-    if op[-5:-4] == '2':
-        p3 = relative_base + data.get(ind+3,0)
+        p2 = data.get(ind + 2, 0)
+    if op[-5:-4] == "2":
+        p3 = relative_base + data.get(ind + 3, 0)
     else:
-        p3 = data.get(ind+3,0)
+        p3 = data.get(ind + 3, 0)
 
-    data[p3] = data.get(p1,0) + data.get(p2,0)
-    return ind+4
+    data[p3] = data.get(p1, 0) + data.get(p2, 0)
+    return ind + 4
+
 
 def multiplication(ind):
     global relative_base
-    op = str(data.get(ind,0)).zfill(5)
-    if op[-3:-2] == '1':
-        p1 = ind+1
-    elif op[-3:-2] == '2':
-        p1 = relative_base + data.get(ind+1,0)
+    op = str(data.get(ind, 0)).zfill(5)
+    if op[-3:-2] == "1":
+        p1 = ind + 1
+    elif op[-3:-2] == "2":
+        p1 = relative_base + data.get(ind + 1, 0)
     else:
-        p1 = data.get(ind+1,0)
-    if op[-4:-3] == '1':
-        p2 = ind+2
-    elif op[-4:-3] == '2':
-        p2 = relative_base + data.get(ind+2,0)
+        p1 = data.get(ind + 1, 0)
+    if op[-4:-3] == "1":
+        p2 = ind + 2
+    elif op[-4:-3] == "2":
+        p2 = relative_base + data.get(ind + 2, 0)
     else:
-        p2 = data.get(ind+2,0)
-    if op[-5:-4] == '2':
-        p3 = relative_base + data.get(ind+3,0)
+        p2 = data.get(ind + 2, 0)
+    if op[-5:-4] == "2":
+        p3 = relative_base + data.get(ind + 3, 0)
     else:
-        p3 = data.get(ind+3,0)
+        p3 = data.get(ind + 3, 0)
 
-    data[p3] = data.get(p1,0) * data.get(p2,0)
-    return ind+4
+    data[p3] = data.get(p1, 0) * data.get(p2, 0)
+    return ind + 4
+
 
 def input_value(ind):
     global relative_base
-    op = str(data.get(ind,0))
-    if op[-3:-2] == '1':
-        p1 = ind+1
-    elif op[-3:-2] == '2':
-        p1 = relative_base + data.get(ind+1,0)
+    op = str(data.get(ind, 0))
+    if op[-3:-2] == "1":
+        p1 = ind + 1
+    elif op[-3:-2] == "2":
+        p1 = relative_base + data.get(ind + 1, 0)
     else:
-        p1 = data.get(ind+1,0)
+        p1 = data.get(ind + 1, 0)
 
     if inputs:
         data[p1] = inputs.pop(0)
     else:
         error()
         data[p1] = outputs[-1]
-    return ind+2
+    return ind + 2
+
 
 def output_value(ind):
     global relative_base
-    op = str(data.get(ind,0))
-    if op[-3:-2] == '1':
-        p1 = ind+1
-    elif op[-3:-2] == '2':
-        p1 = relative_base + data.get(ind+1,0)
+    op = str(data.get(ind, 0))
+    if op[-3:-2] == "1":
+        p1 = ind + 1
+    elif op[-3:-2] == "2":
+        p1 = relative_base + data.get(ind + 1, 0)
     else:
-        p1 = data.get(ind+1,0)
+        p1 = data.get(ind + 1, 0)
 
     global outputs
-    outputs.append(data.get(p1,0))
-    return ind+2
+    outputs.append(data.get(p1, 0))
+    return ind + 2
+
 
 def jump_true(ind):
     global relative_base
-    op = str(data.get(ind,0)).zfill(5)
-    if op[-3:-2] == '1':
-        p1 = ind+1
-    elif op[-3:-2] == '2':
-        p1 = relative_base + data.get(ind+1,0)
+    op = str(data.get(ind, 0)).zfill(5)
+    if op[-3:-2] == "1":
+        p1 = ind + 1
+    elif op[-3:-2] == "2":
+        p1 = relative_base + data.get(ind + 1, 0)
     else:
-        p1 = data.get(ind+1,0)
-    if op[-4:-3] == '1':
-        p2 = ind+2
-    elif op[-4:-3] == '2':
-        p2 = relative_base + data.get(ind+2,0)
+        p1 = data.get(ind + 1, 0)
+    if op[-4:-3] == "1":
+        p2 = ind + 2
+    elif op[-4:-3] == "2":
+        p2 = relative_base + data.get(ind + 2, 0)
     else:
-        p2 = data.get(ind+2,0)
+        p2 = data.get(ind + 2, 0)
 
-    if data.get(p1,0):
-        return data.get(p2,0)
+    if data.get(p1, 0):
+        return data.get(p2, 0)
     else:
-        return ind+3
+        return ind + 3
+
 
 def jump_false(ind):
     global relative_base
-    op = str(data.get(ind,0)).zfill(5)
-    if op[-3:-2] == '1':
-        p1 = ind+1
-    elif op[-3:-2] == '2':
-        p1 = relative_base + data.get(ind+1,0)
+    op = str(data.get(ind, 0)).zfill(5)
+    if op[-3:-2] == "1":
+        p1 = ind + 1
+    elif op[-3:-2] == "2":
+        p1 = relative_base + data.get(ind + 1, 0)
     else:
-        p1 = data.get(ind+1,0)
-    if op[-4:-3] == '1':
-        p2 = ind+2
-    elif op[-4:-3] == '2':
-        p2 = relative_base+data.get(ind+2,0)
+        p1 = data.get(ind + 1, 0)
+    if op[-4:-3] == "1":
+        p2 = ind + 2
+    elif op[-4:-3] == "2":
+        p2 = relative_base + data.get(ind + 2, 0)
     else:
-        p2 = data.get(ind+2,0)
+        p2 = data.get(ind + 2, 0)
 
-    if not data.get(p1,0):
-        return data.get(p2,0)
+    if not data.get(p1, 0):
+        return data.get(p2, 0)
     else:
-        return ind+3
+        return ind + 3
+
 
 def less_than(ind):
     global relative_base
-    op = str(data.get(ind,0)).zfill(5)
-    if op[-3:-2] == '1':
-        p1 = ind+1
-    elif op[-3:-2] == '2':
-        p1 = relative_base + data.get(ind+1,0)
+    op = str(data.get(ind, 0)).zfill(5)
+    if op[-3:-2] == "1":
+        p1 = ind + 1
+    elif op[-3:-2] == "2":
+        p1 = relative_base + data.get(ind + 1, 0)
     else:
-        p1 = data.get(ind+1,0)
-    if op[-4:-3] == '1':
-        p2 = ind+2
-    elif op[-4:-3] == '2':
-        p2 = relative_base + data.get(ind+2,0)
+        p1 = data.get(ind + 1, 0)
+    if op[-4:-3] == "1":
+        p2 = ind + 2
+    elif op[-4:-3] == "2":
+        p2 = relative_base + data.get(ind + 2, 0)
     else:
-        p2 = data.get(ind+2,0)
-    if op[-5:-4] == '2':
-        p3 = relative_base + data.get(ind+3,0)
+        p2 = data.get(ind + 2, 0)
+    if op[-5:-4] == "2":
+        p3 = relative_base + data.get(ind + 3, 0)
     else:
-        p3 = data.get(ind+3,0)
+        p3 = data.get(ind + 3, 0)
 
-    data[p3] = int(data.get(p1,0) < data.get(p2,0))
-    return ind+4
+    data[p3] = int(data.get(p1, 0) < data.get(p2, 0))
+    return ind + 4
+
 
 def equals(ind):
     global relative_base
-    op = str(data.get(ind,0)).zfill(5)
-    if op[-3:-2] == '1':
-        p1 = ind+1
-    elif op[-3:-2] == '2':
-        p1 = relative_base + data.get(ind+1,0)
+    op = str(data.get(ind, 0)).zfill(5)
+    if op[-3:-2] == "1":
+        p1 = ind + 1
+    elif op[-3:-2] == "2":
+        p1 = relative_base + data.get(ind + 1, 0)
     else:
-        p1 = data.get(ind+1,0)
-    if op[-4:-3] == '1':
-        p2 = ind+2
-    elif op[-4:-3] == '2':
-        p2 = relative_base + data.get(ind+2,0)
+        p1 = data.get(ind + 1, 0)
+    if op[-4:-3] == "1":
+        p2 = ind + 2
+    elif op[-4:-3] == "2":
+        p2 = relative_base + data.get(ind + 2, 0)
     else:
-        p2 = data.get(ind+2,0)
-    if op[-5:-4] == '2':
-        p3 = relative_base + data.get(ind+3,0)
+        p2 = data.get(ind + 2, 0)
+    if op[-5:-4] == "2":
+        p3 = relative_base + data.get(ind + 3, 0)
     else:
-        p3 = data.get(ind+3,0)
+        p3 = data.get(ind + 3, 0)
 
-    data[p3] = int(data.get(p1,0) == data.get(p2,0))
-    return ind+4
+    data[p3] = int(data.get(p1, 0) == data.get(p2, 0))
+    return ind + 4
+
 
 def rel_base(ind):
     global relative_base
-    op = str(data.get(ind,0))
-    if op[-3:-2] == '1':
-        p1 = ind+1
-    elif op[-3:-2] == '2':
-        p1 = relative_base + data.get(ind+1,0)
+    op = str(data.get(ind, 0))
+    if op[-3:-2] == "1":
+        p1 = ind + 1
+    elif op[-3:-2] == "2":
+        p1 = relative_base + data.get(ind + 1, 0)
     else:
-        p1 = data.get(ind+1,0)
+        p1 = data.get(ind + 1, 0)
 
-    relative_base += data.get(p1,0)
-    return ind+2
+    relative_base += data.get(p1, 0)
+    return ind + 2
 
-functions = {1: addition, 2: multiplication, 3: input_value, 4: output_value, 5: jump_true, 6: jump_false, 7: less_than, 8: equals, 9: rel_base}
-directions = {0: (0,-1), 1:  (1,0), 2: (0,1), 3: (-1,0)}
+
+functions = {
+    1: addition,
+    2: multiplication,
+    3: input_value,
+    4: output_value,
+    5: jump_true,
+    6: jump_false,
+    7: less_than,
+    8: equals,
+    9: rel_base,
+}
+directions = {0: (0, -1), 1: (1, 0), 2: (0, 1), 3: (-1, 0)}
 
 data = {n: int(input_data[n]) for n in range(len(input_data))}
 
-paint = {(0,0): 0}
+paint = {(0, 0): 0}
 
-position = (0,0)
+position = (0, 0)
 direction = 0
 turn = False
 
@@ -195,25 +215,28 @@ relative_base = 0
 outputs = []
 inputs = []
 ip = 0
-while data.get(ip,0)%100 != 99:
-    inputs = [paint.get(position,0)]
-    ip = functions[int(str(data.get(ip,0))[-2:])](ip)
+while data.get(ip, 0) % 100 != 99:
+    inputs = [paint.get(position, 0)]
+    ip = functions[int(str(data.get(ip, 0))[-2:])](ip)
     if outputs:
         command = outputs.pop(0)
         if turn:
-            direction = (direction + (command==1)-(command==0))%4
-            position = (position[0]+directions[direction][0], position[1]+directions[direction][1])
+            direction = (direction + (command == 1) - (command == 0)) % 4
+            position = (
+                position[0] + directions[direction][0],
+                position[1] + directions[direction][1],
+            )
         else:
             paint[position] = command
         turn = not turn
 
-print('Part 1:', len(paint))
+print("Part 1:", len(paint))
 
 data = {n: int(input_data[n]) for n in range(len(input_data))}
 
-paint = {(0,0): 1}
+paint = {(0, 0): 1}
 
-position = (0,0)
+position = (0, 0)
 direction = 0
 turn = False
 
@@ -221,30 +244,33 @@ relative_base = 0
 outputs = []
 inputs = []
 ip = 0
-while data.get(ip,0)%100 != 99:
-    inputs = [paint.get(position,0)]
-    ip = functions[int(str(data.get(ip,0))[-2:])](ip)
+while data.get(ip, 0) % 100 != 99:
+    inputs = [paint.get(position, 0)]
+    ip = functions[int(str(data.get(ip, 0))[-2:])](ip)
     if outputs:
         command = outputs.pop(0)
         if turn:
-            direction = (direction + (command==1)-(command==0))%4
-            position = (position[0]+directions[direction][0], position[1]+directions[direction][1])
+            direction = (direction + (command == 1) - (command == 0)) % 4
+            position = (
+                position[0] + directions[direction][0],
+                position[1] + directions[direction][1],
+            )
         else:
             paint[position] = command
         turn = not turn
 
-minx = min(paint.keys(), key = lambda t: t[0])[0]
-maxx = max(paint.keys(), key = lambda t: t[0])[0]
-miny = min(paint.keys(), key = lambda t: t[1])[1]
-maxy = max(paint.keys(), key = lambda t: t[1])[1]
+minx = min(paint.keys(), key=lambda t: t[0])[0]
+maxx = max(paint.keys(), key=lambda t: t[0])[0]
+miny = min(paint.keys(), key=lambda t: t[1])[1]
+maxy = max(paint.keys(), key=lambda t: t[1])[1]
 
-print('Part 2:')
+print("Part 2:")
 
-for y in range(miny,maxy+1):
-    for x in range(minx,maxx+1):
-        color = paint.get((x,y),0)
+for y in range(miny, maxy + 1):
+    for x in range(minx, maxx + 1):
+        color = paint.get((x, y), 0)
         if color == 1:
-            print('#',end='')
+            print("#", end="")
         else:
-            print(' ',end='')
-    print('')
+            print(" ", end="")
+    print("")

@@ -1,27 +1,29 @@
 import re
 from collections import deque
 
-input_data = open('day9.in','r').read().strip()
+input_data = open("day9.in", "r").read().strip()
 
-players,marbles = map(int,re.findall(r'\d+',input_data))
+players, marbles = map(int, re.findall(r"\d+", input_data))
 
-def get_score(players,marbles):
+
+def get_score(players, marbles):
     circle = deque([0])
     scores = [0 for p in range(players)]
-    for current_marble in range(1,marbles+1):
-        if current_marble%23:
+    for current_marble in range(1, marbles + 1):
+        if current_marble % 23:
             circle.rotate(-1)
             circle.append(current_marble)
         else:
             circle.rotate(7)
-            scores[current_marble%players] += current_marble + circle.pop()
+            scores[current_marble % players] += current_marble + circle.pop()
             circle.rotate(-1)
     return max(scores)
 
-print('Part 1:',get_score(players,marbles))
-print('Part 2:',get_score(players,100*marbles))
 
-'''
+print("Part 1:", get_score(players, marbles))
+print("Part 2:", get_score(players, 100 * marbles))
+
+"""
 def get_score(players,marbles):
     circle = {0:[0,0]}
     scores = [0 for p in range(players)]
@@ -42,4 +44,4 @@ def get_score(players,marbles):
             current_pos = circle[removed_marble][1]
             circle.pop(removed_marble)
     return max(scores)
-'''
+"""

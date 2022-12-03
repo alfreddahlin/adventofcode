@@ -1,19 +1,18 @@
-
-input_data = open('day14.in','r').read().strip()#.split('\n')
+input_data = open("day14.in", "r").read().strip()  # .split('\n')
 
 recipes = input_data
 
-score = '37'
-elf1,elf2 = 0,1
+score = "37"
+elf1, elf2 = 0, 1
 while recipes not in score[-7:]:
     score += str(int(score[elf1]) + int(score[elf2]))
     elf1 = (elf1 + int(score[elf1]) + 1) % len(score)
     elf2 = (elf2 + int(score[elf2]) + 1) % len(score)
 
-print('Part 1:', score[int(recipes):int(recipes)+10])
-print('Part 2:', score.index(recipes,len(score)-7))
+print("Part 1:", score[int(recipes) : int(recipes) + 10])
+print("Part 2:", score.index(recipes, len(score) - 7))
 
-'''
+"""
 # Just slightly faster
 rec_len = len(recipes)
 score = '37'
@@ -52,4 +51,4 @@ print('Part 1:',"".join([str(i) for i in score[int(recipes):int(recipes)+10]]))
 print('Part 2:',len(score)-7+"".join([str(i) for i in score[-7:]]).index(recipes))
 
 print(time2-time0,time2-time2,time3-time2)
-'''
+"""

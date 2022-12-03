@@ -1,35 +1,38 @@
 import re
 
-input_data = open('day20.in','r').read().strip()#.split('\n')
+input_data = open("day20.in", "r").read().strip()  # .split('\n')
 
 facility = input_data[1:-1]
-head = {'N': (0,-1), 'S': (0,1), 'W': (-1,0), 'E': (1,0)} 
+head = {"N": (0, -1), "S": (0, 1), "W": (-1, 0), "E": (1, 0)}
 
-rooms = {(0,0): 0}
-def get_rooms(branch,pos=(0,0)):
+rooms = {(0, 0): 0}
+
+
+def get_rooms(branch, pos=(0, 0)):
     global coordinates
     moved_pos = pos
     while branch:
         c = branch.pop(0)
-        if c == '(':
-            branch = get_rooms(branch,moved_pos)
-        elif c == '|':
+        if c == "(":
+            branch = get_rooms(branch, moved_pos)
+        elif c == "|":
             moved_pos = pos
-        elif c == ')':
+        elif c == ")":
             return branch
         else:
             new_pos = (moved_pos[0] + head[c][0], moved_pos[1] + head[c][1])
-            rooms[new_pos] = rooms.get(new_pos,rooms[moved_pos]+1)
+            rooms[new_pos] = rooms.get(new_pos, rooms[moved_pos] + 1)
             moved_pos = new_pos
     return branch
+
 
 depth = 1000
 get_rooms(list(facility))
 
-print('Part 1:', max(rooms.values()))
-print('Part 2:', sum([value >= depth for value in rooms.values()]))
+print("Part 1:", max(rooms.values()))
+print("Part 2:", sum([value >= depth for value in rooms.values()]))
 
-'''
+"""
 def get_path(branch):
     long_path =['']
     path_index = 0
@@ -84,4 +87,4 @@ _,doors,rooms = get_path(list(facility))
 
 print('Part 1:',doors)
 print('Part 2:',rooms,'(Why won\'t you work?!)')
-'''
+"""

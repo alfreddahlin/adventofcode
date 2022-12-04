@@ -2,20 +2,16 @@ import re
 
 input_data = open("inputs/day4.in", "r").read().strip().split("\n")
 
-data = [[[int(r) for r in re.findall(r"\d+", line)] for line in input_data]]
+data = [[int(r) for r in re.findall(r"\d+", line)] for line in input_data]
 
 contains = [
-    (f1 <= f2 and t1 >= t2) or (f1 >= f2 and t1 <= t2)
-    for pair in data
-    for f1, t1, f2, t2 in pair
+    (f1 <= f2 and t1 >= t2) or (f1 >= f2 and t1 <= t2) for f1, t1, f2, t2 in data
 ]
 
 print("Part 1:", sum(contains))
 
 overlaps = [
-    (f1 <= t2 and t1 >= f2) or (f1 >= t2 and t1 <= f2)
-    for pair in data
-    for f1, t1, f2, t2 in pair
+    (f1 <= t2 and t1 >= f2) or (f1 >= t2 and t1 <= f2) for f1, t1, f2, t2 in data
 ]
 
 print("Part 2:", sum(overlaps))

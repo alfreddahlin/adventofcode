@@ -18,15 +18,9 @@ print(
     sum([a.intersection(b).pop() for a, b in prios]),
 )
 
-badges = []
 prios_pack = [a.union(b) for a, b in prios]
-[
-    badges.append(
-        prios_pack[i]
-        .intersection(prios_pack[i + 1])
-        .intersection(prios_pack[i + 2])
-        .pop()
-    )
+badges = [
+    (prios_pack[i] & prios_pack[i + 1] & prios_pack[i + 2]).pop()
     for i in range(0, len(prios_pack), 3)
 ]
 

@@ -17,14 +17,11 @@ overlaps = [
 print("Part 2:", sum(overlaps))
 
 # Initial
-# data = [
-#     [[int(r) for r in re.findall(r"\d+", assignment)] for assignment in line.split(",")]
-#     for line in input_data
-# ]
+# data = [[int(r) for r in re.findall(r"\d+", line)] for line in input_data]
 
 # ranges = [[set(range(a, b + 1)) for a, b in pair] for pair in data]
-# contains = [len(a.intersection(b)) >= min(len(a), len(b)) for a, b in ranges]
+# contains = [a <= b or b <= a for a, b in ranges]
 # print("Part 1:", sum(contains))
 
-# overlaps = [len(a.intersection(b)) > 0 for a, b in ranges]
+# overlaps = [bool(a & b) for a, b in ranges]
 # print("Part 2:", sum(overlaps))

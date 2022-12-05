@@ -1,9 +1,10 @@
 import re
 
-input_data = open('day5.in','r').read().strip()
+input_data = open("day5.in", "r").read().strip()
+
 
 def reduce(polymer):
-    polymer_reduced = ''
+    polymer_reduced = ""
     for char in polymer:
         if polymer_reduced and char == polymer_reduced[-1].swapcase():
             polymer_reduced = polymer_reduced[:-1]
@@ -11,7 +12,8 @@ def reduce(polymer):
             polymer_reduced += char
     return polymer_reduced
 
-'''
+
+"""
 def reduce(polymer):
     index = 0
     while index < len(polymer)-1:
@@ -21,17 +23,17 @@ def reduce(polymer):
         else:
             index += 1
     return polymer
-'''
+"""
 
-polymer=reduce(input_data)
+polymer = reduce(input_data)
 
-print('Part 1:', len(polymer))
+print("Part 1:", len(polymer))
 
 # Part 2
 
 poly_reduced = {}
 for char in set(polymer.lower()):
-    poly = reduce(re.sub(char+'|'+char.upper(),'', polymer))
+    poly = reduce(re.sub(char + "|" + char.upper(), "", polymer))
     poly_reduced[char] = (poly, len(poly))
 
-print('Part 2:', min(poly_reduced.values(), key = lambda k: k[1])[1])
+print("Part 2:", min(poly_reduced.values(), key=lambda k: k[1])[1])

@@ -1,32 +1,47 @@
 import re
 
-input_data = open('day4.in','r').read().strip().split('\n')
+input_data = open("day4.in", "r").read().strip().split("\n")
 
-sleep_data = [re.findall(r'\d+-(\d+-\d+) \d+:(\d+)] ([a-zA-Z]+)[\S\s]#?(\d+)?',line)[0] for line in sorted(input_data)]
+sleep_data = [
+    re.findall(r"\d+-(\d+-\d+) \d+:(\d+)] ([a-zA-Z]+)[\S\s]#?(\d+)?", line)[0]
+    for line in sorted(input_data)
+]
 
 sleep_schedule = {}
 
 for index in range(len(sleep_data)):
     date = sleep_data[index][0]
     action = sleep_data[index][2]
-    if(action=="Guard"):
+    if action == "Guard":
         guard = int(sleep_data[index][3])
-    if(action == "wakes"):
-        sleep_schedule[guard]=sleep_schedule.get(guard,{})
-        sleep_schedule[guard].update({minute: sleep_schedule[guard].get(minute,0)+1 for minute in range(int(sleep_data[index-1][1]),int(sleep_data[index][1]))})
+    if action == "wakes":
+        sleep_schedule[guard] = sleep_schedule.get(guard, {})
+        sleep_schedule[guard].update(
+            {
+                minute: sleep_schedule[guard].get(minute, 0) + 1
+                for minute in range(
+                    int(sleep_data[index - 1][1]), int(sleep_data[index][1])
+                )
+            }
+        )
 
-guard_sleep_minute = {id: max(sleep_schedule[id], key = lambda k: sleep_schedule[id][k]) for id in sleep_schedule}
-guard_most_sleep = max(sleep_schedule, key = lambda k: sum(sleep_schedule[k].values()))
+guard_sleep_minute = {
+    id: max(sleep_schedule[id], key=lambda k: sleep_schedule[id][k])
+    for id in sleep_schedule
+}
+guard_most_sleep = max(sleep_schedule, key=lambda k: sum(sleep_schedule[k].values()))
 
-print('Part 1:', guard_most_sleep*guard_sleep_minute[guard_most_sleep])
+print("Part 1:", guard_most_sleep * guard_sleep_minute[guard_most_sleep])
 
 # Part 2
 
-guard_most_sleep_minute = max(guard_sleep_minute, key = lambda k: sleep_schedule[k][guard_sleep_minute[k]])
+guard_most_sleep_minute = max(
+    guard_sleep_minute, key=lambda k: sleep_schedule[k][guard_sleep_minute[k]]
+)
 
-print('Part 2:', guard_most_sleep_minute*guard_sleep_minute[guard_most_sleep_minute])
+print("Part 2:", guard_most_sleep_minute * guard_sleep_minute[guard_most_sleep_minute])
 
-'''
+"""
 for index in range(len(sleep_data)):
     date = sleep_data[index][0]
     minute = int(sleep_data[index][1])
@@ -63,4 +78,4 @@ for guard,sleep_minutes in sleep_schedule.items():
             most_sleep = guard_most_sleep
 
 print(most_sleep[0]*most_sleep[1])
-'''
+"""

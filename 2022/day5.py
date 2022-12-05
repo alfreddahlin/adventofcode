@@ -10,15 +10,15 @@ stacks_data, instructions_data = (
 instructions = [map(int, re.findall(r"\d+", line)) for line in instructions_data]
 
 stacks_9000 = {
-    int(i): list("".join(stack).strip())[::-1]
+    int(i): "".join(stack).strip()[::-1]
     for *stack, i in zip(*stacks_data)
     if i.isdigit()
 }
 stacks_9001 = deepcopy(stacks_9000)
 
 for moves, src, dst in instructions:
-    for move in range(moves):
-        stacks_9000[dst].append(stacks_9000[src].pop(-1))
+    stacks_9000[dst] += stacks_9000[src][-moves:][::-1]
+    stacks_9000[src] = stacks_9000[src][:-moves]
     stacks_9001[dst] += stacks_9001[src][-moves:]
     stacks_9001[src] = stacks_9001[src][:-moves]
 

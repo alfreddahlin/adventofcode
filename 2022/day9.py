@@ -1,5 +1,4 @@
 import math
-from operator import add, sub
 
 input_data = open("inputs/day9.in", "r").read().strip().split("\n")
 
@@ -23,6 +22,8 @@ for dir, steps in data:
 
 print("Part 1:", len(visited_first))
 print("Part 2:", len(visited_end))
+
+# from operator import add, sub
 
 # directions = {"R": (1, 0), "L": (-1, 0), "D": (0, 1), "U": (0, -1)}
 

@@ -10,9 +10,9 @@ for y, row in enumerate(data):
         if x in [0, len(row) - 1] or y in [0, len(col) - 1]:
             visible += 1
         else:
-            left = row[:x][::-1]
+            left = row[x - 1 :: -1]
             right = row[x + 1 :]
-            up = col[:y][::-1]
+            up = col[y - 1 :: -1]
             down = col[y + 1 :]
             if (
                 max(left) < tree

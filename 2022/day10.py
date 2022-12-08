@@ -9,7 +9,7 @@ cycles = [1]
 
 for op in data:
     cycles.append(reg_x)
-    if "addx" in op:
+    if op.startswith("addx"):
         reg_x += int(op.split()[1])
         cycles.append(reg_x)
 
@@ -21,8 +21,8 @@ for c, i in enumerate(cycles[:-1]):
     if sprite == 0:
         pix += "\n"
     if sprite >= i - 1 and sprite <= i + 1:
-        pix += "X"
+        pix += "█"
     else:
-        pix += "."
+        pix += " "
 
 print("Part 2:", pix)

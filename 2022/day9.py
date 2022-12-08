@@ -14,7 +14,7 @@ for dir, steps in data:
         rope[0] += directions[dir]
         for knot in range(1, len(rope)):
             diff = rope[knot - 1] - rope[knot]
-            if abs(diff) > math.sqrt(2):
+            if abs(diff) >= 2:
                 rope[knot] += math.copysign(diff.real != 0, diff.real)
                 rope[knot] += math.copysign(diff.imag != 0, diff.imag) * 1j
         visited_first.add(rope[1])
@@ -23,6 +23,7 @@ for dir, steps in data:
 print("Part 1:", len(visited_first))
 print("Part 2:", len(visited_end))
 
+# Initials
 # from operator import add, sub
 
 # directions = {"R": (1, 0), "L": (-1, 0), "D": (0, 1), "U": (0, -1)}

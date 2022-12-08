@@ -2,6 +2,7 @@ input_data = open("inputs/day8.in", "r").read().strip().split("\n")
 
 data = input_data
 data_t = ["".join(row) for row in zip(*data)]
+
 visible = 0
 max_view_product = 0
 for y, row in enumerate(data):
@@ -33,9 +34,7 @@ for y, row in enumerate(data):
                 (i + 1 for i, height in enumerate(down) if height >= tree),
                 len(down),
             )
-            view_product = (
-                int(view_left) * int(view_right) * int(view_up) * int(view_down)
-            )
+            view_product = view_left * view_right * view_up * view_down
             max_view_product = max(view_product, max_view_product)
 
 

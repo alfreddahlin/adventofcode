@@ -20,7 +20,7 @@ for c, i in enumerate(cycles[:-1]):
     sprite = c % 40
     if sprite == 0:
         pix += "\n"
-    if sprite >= i - 1 and sprite <= i + 1:
+    if sprite in range(i - 1, i + 2):
         pix += "█"
     else:
         pix += " "

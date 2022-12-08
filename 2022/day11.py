@@ -17,31 +17,25 @@ class Monkey:
         self.inspections = 0
 
     def inspect(self, group, calm=True):
-        for item in monkey.items:
-            item = monkey.operation(item)
+        while self.items:
+            item = self.operation(self.items.pop(0))
             if calm:
                 item = int(item / 3)
 
-            group[monkey.targets[item % monkey.factor == 0]].items.append(item)
+            group[self.targets[item % self.factor == 0]].items.append(item)
 
-            monkey.inspections += 1
-        monkey.items = []
+            self.inspections += 1
+
+
+def simulate(monkeys, n, calm=True):
+    for _ in range(n):
+        for monkey in monkeys:
+            monkey.inspect(group=monkeys, calm=calm)
+    return math.prod(sorted([monkey.inspections for monkey in monkeys])[-2:])
 
 
 monkeys = list(map(Monkey, [monkey.split("\n") for monkey in input_data]))
 common_factor = math.prod(monkey.factor for monkey in monkeys)
 
-
-monkeys_calm = deepcopy(monkeys)
-for tick in range(20):
-    for monkey in monkeys_calm:
-        monkey.inspect(group=monkeys_calm)
-
-inspections_calm = sorted([monkey.inspections for monkey in monkeys_calm])[-2:]
-print("Part 1:", math.prod(inspections_calm))
-
-for tick in range(10000):
-    for monkey in monkeys:
-        monkey.inspect(group=monkeys, calm=False)
-inspections = sorted([monkey.inspections for monkey in monkeys])[-2:]
-print("Part 2:", math.prod(inspections))
+print("Part 1:", simulate(monkeys=deepcopy(monkeys), n=20, calm=True))
+print("Part 2:", simulate(monkeys=deepcopy(monkeys), n=10000, calm=False))

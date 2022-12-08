@@ -2,18 +2,18 @@ import re
 
 input_data = open("inputs/day10.in", "r").read().strip().split("\n")
 
-data = input_data
-ss_index = [40 * i + 20 for i in range(6)]
+data = [line.split() for line in input_data]
+
 reg_x = 1
 cycles = [1]
 
 for op in data:
     cycles.append(reg_x)
-    if op.startswith("addx"):
-        reg_x += int(op.split()[1])
+    if op[0] == "addx":
+        reg_x += int(op[1])
         cycles.append(reg_x)
 
-print("Part 1:", sum(cycles[i - 1] * i for i in ss_index))
+print("Part 1:", sum(cycles[i - 1] * i for i in range(20, len(cycles), 40)))
 
 pix = ""
 for c, i in enumerate(cycles[:-1]):

@@ -11,11 +11,14 @@ data[start_p1] = ord("a")
 data[end] = ord("z")
 
 
-def find_steps(data, current, target=None):
+def find_steps(data, start, target=None):
     steps = 0
-    queue = []
-    seen = {current}
-    while current != target and (target is not None or data[current] != ord("a")):
+    queue = [(start, 0)]
+    seen = {start}
+    while queue:
+        current, steps = queue.pop(0)
+        if current == target or (target is None and data[current] == ord("a")):
+            return steps
         alternatives = [
             current + step
             for step in possible
@@ -23,8 +26,7 @@ def find_steps(data, current, target=None):
         ]
         queue += [(new, steps + 1) for new in alternatives if new not in seen]
         seen.update(alternatives)
-        current, steps = queue.pop(0)
-    return steps
+    return None
 
 
 print("Part 1:", find_steps(data, end, start_p1))

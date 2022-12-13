@@ -1,56 +1,44 @@
-from functools import cmp_to_key
+import math
 
 input_data = open("inputs/day13.in", "r").read().strip().split("\n\n")
 
+data = [list(map(eval, line.split("\n"))) for line in input_data]
+dividers = [[[2]], [[6]]]
+
 
 def is_ordered(left, right):
-    if isinstance(left, list) and isinstance(right, list):
-        if len(right) == 0 and len(left) == 0:
-            return 0
-        elif len(right) == 0 or len(left) == 0:
-            if len(left) == 0:
-                return -1
-            else:
-                return 1
-    elif isinstance(left, list):
-        if len(left) == 0:
-            return -1
-        right = [right]
-    elif isinstance(right, list):
-        if len(right) == 0:
-            return 1
-        left = [left]
-    else:
-        if left == right:
-            return 0
-        else:
-            if left < right:
-                return -1
-            else:
-                return 1
-    for i in range(min(len(left), len(right))):
-        ordered = is_ordered(left[i], right[i])
-        if ordered != 0:
-            return ordered
-    if len(left) == len(right):
-        return 0
-    elif len(left) < len(right):
-        return -1
-    else:
-        return 1
+    match left, right:
+        case int(), int():
+            return left - right
+        case int(), list():
+            return is_ordered([left], right)
+        case list(), int():
+            return is_ordered(left, [right])
+        case list(), list():
+            for l, r in zip(left, right):
+                if diff := is_ordered(l, r):
+                    return diff
+            return len(left) - len(right)
 
 
-data = [list(map(eval, line.split("\n"))) for line in input_data]
-
-sum_ordered = 0
-for i, (left, right) in enumerate(data):
-    ordered = None
-    while ordered is None:
-        ordered = is_ordered(left, right)
-    sum_ordered += (ordered < 0) * (i + 1)
+sum_ordered = sum(
+    [i for i, (left, right) in enumerate(data, 1) if is_ordered(left, right) < 0]
+)
 print("Part 1:", sum_ordered)
 
-dividers = [[[2]], [[6]]]
-data.append(dividers)
-data = sorted([l for pair in data for l in pair], key=cmp_to_key(is_ordered))
-print("Part 2:", (data.index(dividers[0]) + 1) * (data.index(dividers[1]) + 1))
+flat_data = [l for pair in data + [dividers] for l in pair]
+divider_indexes = [
+    sum(is_ordered(element, divider) <= 0 for element in flat_data)
+    for divider in dividers
+]
+print(
+    "Part 2:",
+    math.prod(divider_indexes),
+)
+
+# Initial
+# from functools import cmp_to_key
+# ordered = sorted(
+#     [l for pair in data + [dividers] for l in pair], key=cmp_to_key(is_ordered)
+# )
+# print("Part 2:", math.prod(ordered.index(divider) + 1 for divider in dividers))

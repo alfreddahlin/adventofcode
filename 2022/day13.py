@@ -1,8 +1,9 @@
 import math
+import json
 
 input_data = open("inputs/day13.in", "r").read().strip().split("\n\n")
 
-data = [list(map(eval, line.split("\n"))) for line in input_data]
+data = [list(map(json.loads, line.split("\n"))) for line in input_data]
 dividers = [[[2]], [[6]]]
 
 

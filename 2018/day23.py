@@ -50,7 +50,7 @@ r_final = []
 for dx, dy, dz in [
     (dx, dy, dz)
     for dx, dy, dz in product([-1, 0, 1], repeat=3)
-    if dx**2 + dy**2 + dz**2 == 2
+    if dx ** 2 + dy ** 2 + dz ** 2 == 2
 ]:
     pos = corner_max
     r_max = ((0, 0, 0), 0)

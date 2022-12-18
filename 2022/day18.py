@@ -2,8 +2,8 @@ input_data = open("inputs/day18.in", "r").read().strip().split("\n")
 adjacent = ((1, 0, 0), (-1, 0, 0), (0, 1, 0), (0, -1, 0), (0, 0, 1), (0, 0, -1))
 
 data = {tuple(int(c) for c in line.split(",")) for line in input_data}
-max_dim = max(max(c) for c in zip(*data))
 min_dim = min(min(c) for c in zip(*data))
+max_dim = max(max(c) for c in zip(*data))
 
 
 def find_surfaces(data, start):
@@ -12,7 +12,7 @@ def find_surfaces(data, start):
     seen = {start}
     while queue:
         current = queue.pop(0)
-        alternatives = get_alternatives(current)
+        alternatives = get_neighbors(current)
         surfaces += sum(1 for n in alternatives if n in data)
         queue += {
             new
@@ -25,16 +25,13 @@ def find_surfaces(data, start):
     return surfaces
 
 
-def get_alternatives(current):
+def get_neighbors(current):
     return {tuple(current[i] + a[i] for i in range(3)) for a in adjacent}
 
 
-neighbors = 0
+surfaces = 0
 for c in data:
-    neighbors += sum(tuple(c[i] + a[i] for i in range(3)) in data for a in adjacent)
+    surfaces += 6 - sum(n in data for n in get_neighbors(c))
 
-print("Part 1:", 6 * len(data) - neighbors)
-print(
-    "Part 2:",
-    find_surfaces(data, (0, 0, 0)),
-)
+print("Part 1:", surfaces)
+print("Part 2:", find_surfaces(data, (0, 0, 0)))

@@ -33,7 +33,6 @@ print(
 borders_any = set()
 borders_several = set()
 for s, r in sensors.items():
-    print(s, r)
     borders = {
         x + s.real + (y + s.imag) * 1j
         for x in range(-r - 1, r + 2)

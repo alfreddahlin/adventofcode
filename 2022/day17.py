@@ -42,7 +42,7 @@ def cave_height(cave):
 cave = set()
 n = 0
 seen = {}
-cycle_height = 0
+cycle_length = 0
 while True:
     if n == simulate[0]:
         height = cave_height(cave)
@@ -56,7 +56,7 @@ while True:
         else:
             cave.update(pos + r for r in rock)
             break
-    if cycle_height == 0 and n > 10:
+    if cycle_length == 0 and n > 10:
         key = (j % len(input_data), n % len(rocks))
         if key in seen:
             cycle_length = n - seen[key][0]

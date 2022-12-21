@@ -1,7 +1,7 @@
 import re
 import math
 
-input_data = open("inputs/day19_test.in", "r").read().strip().split("\n")
+input_data = open("inputs/day19.in", "r").read().strip().split("\n")
 
 recipes = [tuple(map(int, re.findall(r"-?\d+", line))) for line in input_data]
 
@@ -78,5 +78,6 @@ def get_alternatives(recipe, ore, clay, obsidian, ore_bot, clay_bot, obsidian_bo
 
 
 # Note: This code is trash and takes hours, but I'm tired of graphsearches
+# Improvement would be to disregard waiting steps and add cost of waiting for different robots
 print("Part 1:", sum(recipe[0] * get_geodes(recipe, 24) for recipe in recipes))
 print("Part 2:", math.prod(get_geodes(recipe, 32) for recipe in recipes[:3]))

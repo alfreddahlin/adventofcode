@@ -31,6 +31,17 @@ def mix(data, indexes, factor=1, n=1):
     return sum(sequence[(start + i) % l] for i in indexes)
 
 
-print(mix(data, indexes))
+print("Part 1:", mix(data, indexes))
+print("Part 2:", mix(data, indexes, key, repeat))
 
-print(mix(data, indexes, key, repeat))
+# Inspiration (dirty...)
+# # Part 2
+# numbers = [int(x) * 811589153 for x in open("inputs/day20.in")]
+# indices = list(range(len(numbers)))
+
+# for i in indices * 10:
+#     indices.pop(j := indices.index(i))
+#     indices.insert((j + numbers[i]) % len(indices), i)
+
+# zero = indices.index(numbers.index(0))
+# print(sum(numbers[indices[(zero + p) % len(numbers)]] for p in [1000, 2000, 3000]))

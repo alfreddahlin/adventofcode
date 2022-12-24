@@ -130,12 +130,12 @@ print("Part 2:", i)
 #     return canthave | {want[elf] for elf in canhave}
 
 
-# i = 0
 # pelfs = {}
-# while elfs != pelfs:
+# for i in count(1):
+#     if pelfs == pelfs := elfs:
+#         break
 #     pelfs = elfs
-#     elfs = update(elfs, i)
-#     i += 1  # this round they moved
+#     elfs = update(elfs, i-1)
 #     if i == 10:
 #         print("Part 1:", empty_ground(elfs))  # part 1
 # print("Part 2:", i)  # part 2

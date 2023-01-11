@@ -2,11 +2,10 @@
 YEAR=$1
 DAY=$2
 
-mkdir -p $YEAR'/inputs'
-
-URL='https://adventofcode.com/'$YEAR'/day/'$DAY
-INPUT_FILE=$YEAR/inputs/day$DAY.in
-SOLUTION_FILE=$YEAR/day$DAY.py
+mkdir -p aoc/$YEAR/inputs
+URL=https://adventofcode.com/$YEAR/day/$DAY
+INPUT_FILE=aoc/$YEAR/inputs/day$DAY.in
+SOLUTION_FILE=aoc/$YEAR/day$DAY.py
 
 max_fails=10
 cur_fails=0
@@ -23,11 +22,10 @@ do
 done
 
 echo "It's ready, start solving!"
-cp -i day0.py $SOLUTION_FILE
-# Updates the day in the template
-sed -i -E "s/day0/day$DAY/" $SOLUTION_FILE
-cmd.exe /C start $URL
+cp -i aoc/day0.py $SOLUTION_FILE
+# Updates the day in the template, not currently used as the full file name is passed and parsed every time
+# sed -i -E "s/0/$DAY/" $SOLUTION_FILE
+
+sensible-browser $URL
 code -r $INPUT_FILE $SOLUTION_FILE
 # code -r $SOLUTION_FILE
-cd $YEAR
-python day$DAY.py

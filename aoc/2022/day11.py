@@ -1,8 +1,9 @@
+from aoc.utils.input import get_input
 import re
 import math
 from copy import deepcopy
 
-input_data = open("inputs/day11.in", "r").read().strip().split("\n\n")
+input_data = get_input(__file__, "\n\n")
 
 
 class Monkey:

@@ -1,6 +1,7 @@
+from aoc.utils import input
 from itertools import cycle
 
-input_data = open("inputs/day17_test.in", "r").read().strip()
+input_data = input.get_input(__file__)
 
 pushes = {"<": -1, ">": 1}
 jets = enumerate(cycle(pushes[jet] for jet in input_data))
@@ -44,9 +45,9 @@ n = 0
 seen = {}
 cycle_length = 0
 while True:
-    if n == simulate[0]:
-        height = cave_height(cave)
     current_height = cave_height(cave)
+    if n == simulate[0]:
+        height = current_height
     pos = 3 + (cave_height(cave) + 4) * 1j
     n, rock = next(rocks_cycle)
     for j, jet in jets:

@@ -33,7 +33,6 @@ coverage.xml
 
 # Binaries for programs and plugins
 *.exe
-*.exe~
 *.dll
 *.dylib
 .python-version

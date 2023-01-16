@@ -23,6 +23,10 @@ def get_numbers(file):
     return get_string_numbers(get_input(file))
 
 
+def get_lines(file, expression):
+    return [re.match(expression, line).groups() for line in get_input(file, "\n")]
+
+
 def get_line_numbers(file):
     lines = get_input(file, "\n")
     return [get_numbers(line) for line in lines]

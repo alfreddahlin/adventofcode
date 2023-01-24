@@ -14,6 +14,13 @@ def get_input(file, delimiter=None):
         return data
 
 
+def get_grid(file, func=lambda x: x):
+    data = get_input(file, delimiter="\n")
+    return {
+        x + y * 1j: func(c) for y, line in enumerate(data) for x, c in enumerate(line)
+    }
+
+
 def get_string_numbers(input):
     found = re.findall(r"-?\d+", input)
     return mapl(int, found)

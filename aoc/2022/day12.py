@@ -1,5 +1,5 @@
-from aoc.utils import graph
 from aoc.utils import input
+from aoc.utils import graph
 
 data = input.get_grid(__file__, ord)
 
@@ -9,7 +9,7 @@ data[start_p1] = ord("a")
 data[end] = ord("z")
 
 
-def get_neighbors_reverse(state, tree):
+def get_neighbors_reverse(state, _, tree):
     return [
         state + step
         for step in possible

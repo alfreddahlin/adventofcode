@@ -10,5 +10,8 @@ init:
 setup:
 	@aoc/start_solving.sh ${year} ${day}
 
+test:
+	@python -m aoc.${year}.day${day} test
+
 solve:
 	@python -m aoc.${year}.day${day}

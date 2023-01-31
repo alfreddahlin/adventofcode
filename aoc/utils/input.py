@@ -1,12 +1,19 @@
 import os
 import re
+import sys
 
 
 def get_input(file, delimiter=None):
     year_folder = os.path.dirname(file)
     problem_file_name = os.path.basename(file)
+    if len(sys.argv) > 1 and sys.argv[1] == "test":
+        input_suffix = "_test"
+    else:
+        input_suffix = ""
 
-    input_file = f"{year_folder}/inputs/{problem_file_name.replace('.py', '.in')}"
+    input_file = (
+        f"{year_folder}/inputs/{problem_file_name.replace('.py', input_suffix+'.in')}"
+    )
     data = open(input_file, "r").read().strip()
     if delimiter:
         return data.split(delimiter)
